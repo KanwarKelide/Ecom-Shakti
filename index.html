@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecomm Shakti — Marketplace Seller Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fire:   #E8450A;
+  --ember:  #FF6B35;
+  --gold:   #F0A500;
+  --ink:    #0F0D0B;
+  --smoke:  #2A2520;
+  --warm:   #F7F3EE;
+  --cream:  #FDF9F4;
+  --stone:  #8C8479;
+  --border: #E4DDD4;
+  --fire-50:  #FDF0EB;
+  --fire-100: #FAD5C5;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Onest', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 68px;
+  background: rgba(15,13,11,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.3s;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-logo-icon {
+  width: 36px; height: 36px;
+  background: var(--fire);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-logo-words { display: flex; flex-direction: column; }
+.nav-logo-ecom {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.nav-logo-shakti {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.nav-logo-shakti .dot { color: var(--fire); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: white; }
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--fire);
+  color: white !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 9px 20px;
+  border-radius: 7px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s !important;
+}
+.nav-cta:hover { background: #c93a09 !important; transform: translateY(-1px) !important; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow-1 {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,69,10,0.22) 0%, transparent 65%);
+  top: -150px; right: -100px;
+  pointer-events: none;
+}
+.hero-glow-2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,165,0,0.12) 0%, transparent 65%);
+  bottom: -80px; left: 100px;
+  pointer-events: none;
+}
+.hero-glow-3 {
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,69,10,0.1) 0%, transparent 65%);
+  bottom: 100px; right: 200px;
+  pointer-events: none;
+}
+
+.hero-bg-word {
+  position: absolute;
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(160px, 22vw, 320px);
+  font-weight: 800;
+  color: rgba(255,255,255,0.025);
+  bottom: -20px; right: -20px;
+  letter-spacing: -8px;
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232,69,10,0.12);
+  border: 1px solid rgba(232,69,10,0.28);
+  color: var(--ember);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+  width: fit-content;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  background: var(--ember);
+  border-radius: 50%;
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.hero-h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(52px, 6.5vw, 88px);
+  font-weight: 800;
+  color: white;
+  line-height: 0.93;
+  letter-spacing: -2px;
+  margin-bottom: 28px;
+}
+.hero-h1 .fire { color: var(--fire); }
+.hero-h1 .gold { color: var(--gold); }
+
+.hero-sub {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: rgba(255,255,255,0.45);
+  max-width: 480px;
+  line-height: 1.65;
+  margin-bottom: 44px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--fire);
+  color: white;
+  font-family: 'Onest', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 8px 32px rgba(232,69,10,0.35), 0 2px 8px rgba(232,69,10,0.2);
+}
+.btn-primary:hover {
+  background: #c93a09;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(232,69,10,0.45), 0 4px 12px rgba(232,69,10,0.25);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.55);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 14px 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.btn-ghost:hover { color: white; }
+
+/* Hero card */
+.hero-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 20px;
+  padding: 32px;
+  backdrop-filter: blur(8px);
+}
+
+.hero-card-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  margin-bottom: 20px;
+}
+
+.hero-pain-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.hero-pain-item:last-child { border-bottom: none; padding-bottom: 0; }
+.hero-pain-item:first-of-type { padding-top: 0; }
+
+.pain-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(232,69,10,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.pain-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+.pain-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.5;
+}
+
+.hero-card-bottom {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-card-fix {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ember);
+}
+.hero-card-fix-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ── MARQUEE ── */
+.marquee-strip {
+  background: var(--fire);
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 22s linear infinite;
+  gap: 0;
+}
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: white;
+  padding: 0 36px;
+}
+.marquee-sep {
+  color: rgba(255,255,255,0.4);
+  font-size: 16px;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── SECTION BASE ── */
+.section {
+  padding: 96px 48px;
+}
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--fire);
+  margin-bottom: 16px;
+}
+.section-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 2px;
+  background: var(--fire);
+  border-radius: 1px;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -1.5px;
+  line-height: 0.97;
+  margin-bottom: 20px;
+}
+.section-title.white { color: white; }
+.section-desc {
+  font-size: 17px;
+  color: var(--stone);
+  max-width: 540px;
+  line-height: 1.75;
+}
+
+/* ── PROBLEMS SECTION ── */
+.problems {
+  background: var(--warm);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 56px;
+}
+.problem-cell {
+  background: var(--cream);
+  padding: 32px 28px;
+  position: relative;
+  transition: background 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+.problem-cell:hover {
+  background: white;
+  box-shadow: inset 0 0 0 1.5px var(--fire), 0 4px 24px rgba(232,69,10,0.06);
+}
+
+.problem-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--fire);
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+.problem-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  display: block;
+}
+.problem-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.problem-desc {
+  font-size: 13.5px;
+  color: var(--stone);
+  line-height: 1.65;
+}
+.problem-arrow {
+  position: absolute;
+  bottom: 24px; right: 24px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--fire-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fire);
+  font-size: 13px;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.problem-cell:hover .problem-arrow { opacity: 1; transform: translateX(0); }
+
+/* ── HOW IT WORKS ── */
+.how-works { background: var(--ink); }
+.steps-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 56px;
+  position: relative;
+}
+.steps-row::before {
+  content: '';
+  position: absolute;
+  top: 36px; left: calc(16.6% + 36px); right: calc(16.6% + 36px);
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.08) 0%, var(--fire) 50%, rgba(255,255,255,0.08) 100%);
+  pointer-events: none;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 28px;
+}
+.step-circle {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.step-circle.fire-bg {
+  background: var(--fire);
+  box-shadow: 0 8px 32px rgba(232,69,10,0.35);
+}
+.step-circle.outlined {
+  background: rgba(255,255,255,0.04);
+  border: 2px solid rgba(255,255,255,0.12);
+}
+.step-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+}
+.step-circle.fire-bg .step-num { color: white; }
+.step-circle.outlined .step-num { color: var(--stone); }
+.step-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+}
+.step-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+}
+
+/* ── SERVICES ── */
+.services { background: var(--ink); position: relative; overflow: hidden; }
+.services-glow {
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,69,10,0.15) 0%, transparent 65%);
+  top: -100px; left: -150px;
+  pointer-events: none;
+}
+.services-glow-2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,165,0,0.08) 0%, transparent 65%);
+  bottom: -80px; right: -80px;
+  pointer-events: none;
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 56px;
+}
+.pricing-card {
+  border-radius: 20px;
+  padding: 36px 32px;
+  position: relative;
+  transition: transform 0.2s;
+}
+.pricing-card:hover { transform: translateY(-4px); }
+
+.pricing-card.default {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.pricing-card.featured {
+  background: white;
+  border: none;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+}
+.pricing-card.featured:hover { transform: translateY(-6px); }
+
+.pricing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+.pricing-badge.tier-label {
+  background: rgba(232,69,10,0.12);
+  color: var(--ember);
+  border: 1px solid rgba(232,69,10,0.2);
+}
+.pricing-badge.popular {
+  background: var(--fire);
+  color: white;
+}
+
+.pricing-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+.pricing-card.default .pricing-name { color: white; }
+.pricing-card.featured .pricing-name { color: var(--ink); }
+
+.pricing-price {
+  font-family: 'Syne', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--fire);
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 4px;
+}
+.pricing-period {
+  font-size: 13px;
+  margin-bottom: 28px;
+}
+.pricing-card.default .pricing-period { color: rgba(255,255,255,0.3); }
+.pricing-card.featured .pricing-period { color: var(--stone); }
+
+.pricing-divider {
+  height: 1px;
+  margin-bottom: 24px;
+}
+.pricing-card.default .pricing-divider { background: rgba(255,255,255,0.08); }
+.pricing-card.featured .pricing-divider { background: var(--border); }
+
+.pricing-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.pricing-card.default .pricing-feature { color: rgba(255,255,255,0.6); }
+.pricing-card.featured .pricing-feature { color: var(--smoke); }
+
+.feature-check {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.feature-check.green { background: rgba(0,196,140,0.12); color: #00C48C; }
+.feature-check.fire { background: rgba(232,69,10,0.12); color: var(--fire); }
+
+.pricing-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px 24px;
+  border-radius: 10px;
+  font-family: 'Onest', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 28px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  cursor: pointer;
+  border: none;
+}
+.pricing-cta.outline {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.7);
+}
+.pricing-cta.outline:hover {
+  background: rgba(255,255,255,0.06);
+  color: white;
+  border-color: rgba(255,255,255,0.25);
+}
+.pricing-cta.solid {
+  background: var(--fire);
+  color: white;
+  box-shadow: 0 6px 24px rgba(232,69,10,0.4);
+}
+.pricing-cta.solid:hover {
+  background: #c93a09;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 32px rgba(232,69,10,0.5);
+}
+
+/* ── WHAT WE DO ── */
+.what-we-do { background: var(--cream); }
+.platforms-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+.platform-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.platform-pill .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.services-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.service-item {
+  display: flex;
+  gap: 18px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.service-item:last-child { border-bottom: none; }
+.service-icon-box {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: var(--fire-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.service-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.2px;
+  margin-bottom: 4px;
+}
+.service-desc {
+  font-size: 13px;
+  color: var(--stone);
+  line-height: 1.6;
+}
+
+/* ── RESULTS BANNER ── */
+.results-banner {
+  background: var(--ink);
+  padding: 80px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.results-banner-glow {
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,165,0,0.14) 0%, transparent 65%);
+  top: -150px; right: -100px;
+  pointer-events: none;
+}
+
+.results-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.results-text .section-title { color: white; margin-bottom: 16px; }
+.results-text .section-desc { color: rgba(255,255,255,0.4); margin-bottom: 32px; }
+
+.result-points { list-style: none; }
+.result-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 15px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.5;
+}
+.result-points li:last-child { border-bottom: none; }
+.result-points li::before {
+  content: '→';
+  color: var(--fire);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.outcomes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.outcome-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 24px 20px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.outcome-card:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(232,69,10,0.25);
+}
+.outcome-icon { font-size: 24px; margin-bottom: 10px; }
+.outcome-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.2px;
+  margin-bottom: 6px;
+}
+.outcome-desc { font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.6; }
+
+/* ── TESTIMONIALS ── */
+.testimonials { background: var(--warm); border-top: 1px solid var(--border); }
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 48px;
+}
+.testi-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.testi-card:hover {
+  box-shadow: 0 12px 36px rgba(0,0,0,0.07);
+  transform: translateY(-3px);
+}
+.testi-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 16px;
+}
+.testi-star { color: var(--gold); font-size: 14px; }
+.testi-quote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.testi-divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 16px;
+}
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.testi-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--fire-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--fire);
+  flex-shrink: 0;
+}
+.testi-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.testi-role {
+  font-size: 12px;
+  color: var(--stone);
+}
+.testi-platform {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--stone);
+  letter-spacing: 0.5px;
+  background: var(--warm);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 4px 10px;
+}
+
+/* ── CTA SECTION ── */
+.cta-section {
+  background: var(--fire);
+  padding: 96px 48px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.cta-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 60%);
+  top: -200px; left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.cta-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.cta-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 16px;
+}
+.cta-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 800;
+  color: white;
+  letter-spacing: -1.5px;
+  line-height: 0.95;
+  margin-bottom: 20px;
+}
+.cta-sub {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 19px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+.cta-buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: var(--fire);
+  font-family: 'Onest', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+.btn-white:hover {
+  background: var(--cream);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.2);
+}
+.btn-outline-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: white;
+  font-family: 'Onest', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn-outline-white:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.7);
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--ink);
+  padding: 64px 48px 32px;
+  color: rgba(255,255,255,0.35);
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 32px;
+}
+.footer-brand { }
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.footer-logo-icon {
+  width: 36px; height: 36px;
+  background: var(--fire);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.footer-brand-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.5px;
+}
+.footer-brand-name .dot { color: var(--fire); }
+.footer-tagline {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: rgba(255,255,255,0.3);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.footer-col-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 16px;
+}
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a {
+  color: rgba(255,255,255,0.38);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: rgba(255,255,255,0.75); }
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-copy {
+  font-size: 13px;
+  color: rgba(255,255,255,0.2);
+}
+.footer-copy strong { color: var(--fire); font-weight: 600; }
+.footer-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(37,211,102,0.12);
+  border: 1px solid rgba(37,211,102,0.2);
+  color: #25D366;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.footer-whatsapp:hover { background: rgba(37,211,102,0.2); }
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 24px 64px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .section { padding: 72px 24px; }
+  .problems-grid { grid-template-columns: 1fr 1fr; }
+  .steps-row::before { display: none; }
+  .steps-row { gap: 32px; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+  .services-columns { grid-template-columns: 1fr; }
+  .results-inner { grid-template-columns: 1fr; gap: 40px; }
+  .outcomes-grid { grid-template-columns: 1fr 1fr; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .cta-section { padding: 72px 24px; }
+  .results-banner { padding: 72px 24px; }
+}
+@media (max-width: 600px) {
+  .problems-grid { grid-template-columns: 1fr; }
+  .steps-row { grid-template-columns: 1fr; }
+  .outcomes-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .hero-h1 { font-size: 46px; letter-spacing: -1.5px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 1C10 1 4 6.5 4 12C4 15.314 6.686 18 10 18C13.314 18 16 15.314 16 12C16 9 14 7 14 7C14 7 13.5 10 11.5 10.5C11.5 10.5 13 8 11 5C11 5 10.5 8 8.5 9C8.5 9 7 7 10 1Z" fill="white" opacity="0.9"/>
+        <path d="M8.5 14.5C8.5 15.881 9.119 17 10 17C10.881 17 11.5 15.881 11.5 14.5C11.5 13.5 10.8 12.8 10 12.5C9.2 12.8 8.5 13.5 8.5 14.5Z" fill="white" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="nav-logo-words">
+      <span class="nav-logo-ecom">Ecomm</span>
+      <span class="nav-logo-shakti">Shakti<span class="dot">.</span></span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#problems">Problems We Fix</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <a href="https://wa.me/919999999999" class="nav-cta">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Free Audit on WhatsApp
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-glow-3"></div>
+  <div class="hero-bg-word">SHAKTI</div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Marketplace Seller Management
+      </div>
+      <h1 class="hero-h1">
+        Your seller<br>account.<br><span class="fire">Fixed.</span><br><span class="gold">Growing.</span>
+      </h1>
+      <p class="hero-sub">
+        Suspended account? Listings rejected? Sales dropped overnight? We fix marketplace problems fast — and keep your business growing.
+      </p>
+      <div class="hero-actions">
+        <a href="https://wa.me/919999999999" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Get Free Account Audit
+        </a>
+        <a href="#pricing" class="btn-ghost">
+          View Plans
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-card reveal">
+      <div class="hero-card-label">Common Problems We Fix</div>
+      <div class="hero-pain-item">
+        <div class="pain-icon">🚫</div>
+        <div>
+          <div class="pain-title">Account Suspended</div>
+          <div class="pain-desc">Policy violations, health score drops — we file appeals and restore accounts.</div>
+        </div>
+      </div>
+      <div class="hero-pain-item">
+        <div class="pain-icon">📦</div>
+        <div>
+          <div class="pain-title">Listings Rejected</div>
+          <div class="pain-desc">Catalog QC errors blocking your products from going live.</div>
+        </div>
+      </div>
+      <div class="hero-pain-item">
+        <div class="pain-icon">📉</div>
+        <div>
+          <div class="pain-title">Sales Dropped Suddenly</div>
+          <div class="pain-desc">Algorithm changes, poor listing SEO — we diagnose and fix visibility.</div>
+        </div>
+      </div>
+      <div class="hero-pain-item">
+        <div class="pain-icon">📣</div>
+        <div>
+          <div class="pain-title">Ads Not Working</div>
+          <div class="pain-desc">Wasted ad budget with no returns — we optimize for real ROI.</div>
+        </div>
+      </div>
+      <div class="hero-card-bottom">
+        <div>
+          <div class="hero-card-fix" style="color: #25D366;">✓ Results within 14 days</div>
+          <div class="hero-card-fix-sub">Starting at ₹1,999 / month</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div style="background: var(--smoke); padding: 24px 48px; border-top: 1px solid rgba(255,255,255,0.06);">
+  <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;">
+    <div style="text-align: center; padding: 8px 0; border-right: 1px solid rgba(255,255,255,0.08);">
+      <div style="font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: var(--fire); letter-spacing: -0.5px; line-height: 1;">3 Platforms</div>
+      <div style="font-size: 11px; color: rgba(255,255,255,0.32); margin-top: 4px; text-transform: uppercase; letter-spacing: 1.5px;">Meesho · Amazon · Flipkart</div>
+    </div>
+    <div style="text-align: center; padding: 8px 0; border-right: 1px solid rgba(255,255,255,0.08);">
+      <div style="font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: white; letter-spacing: -0.5px; line-height: 1;">14 Days</div>
+      <div style="font-size: 11px; color: rgba(255,255,255,0.32); margin-top: 4px; text-transform: uppercase; letter-spacing: 1.5px;">Avg. first results</div>
+    </div>
+    <div style="text-align: center; padding: 8px 0; border-right: 1px solid rgba(255,255,255,0.08);">
+      <div style="font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: white; letter-spacing: -0.5px; line-height: 1;">₹1,999</div>
+      <div style="font-size: 11px; color: rgba(255,255,255,0.32); margin-top: 4px; text-transform: uppercase; letter-spacing: 1.5px;">Starting per month</div>
+    </div>
+    <div style="text-align: center; padding: 8px 0;">
+      <div style="font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: white; letter-spacing: -0.5px; line-height: 1;">24 hrs</div>
+      <div style="font-size: 11px; color: rgba(255,255,255,0.32); margin-top: 4px; text-transform: uppercase; letter-spacing: 1.5px;">Response time</div>
+    </div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">Meesho Seller Management <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Amazon India <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Flipkart Sellers <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Catalog QC Fix <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Account Health <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Listing Optimization <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Ads Management <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">D2C Website Build <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Hindi Support <span class="marquee-sep">·</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Meesho Seller Management <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Amazon India <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Flipkart Sellers <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Catalog QC Fix <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Account Health <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Listing Optimization <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Ads Management <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">D2C Website Build <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Hindi Support <span class="marquee-sep">·</span></span>
+  </div>
+</div>
+
+<!-- PROBLEMS -->
+<section class="section problems" id="problems">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">What sellers face</div>
+      <h2 class="section-title">Six problems that<br>kill seller growth</h2>
+    </div>
+    <div class="problems-grid reveal">
+      <div class="problem-cell">
+        <div class="problem-num">01</div>
+        <span class="problem-icon">🚫</span>
+        <div class="problem-title">Account Suspended</div>
+        <div class="problem-desc">One policy strike and your entire store goes offline. Every day without resolution costs you real money.</div>
+        <div class="problem-arrow">→</div>
+      </div>
+      <div class="problem-cell">
+        <div class="problem-num">02</div>
+        <span class="problem-icon">❌</span>
+        <div class="problem-title">Catalog QC Rejections</div>
+        <div class="problem-desc">Products stuck in review. Meesho and Flipkart QC systems block listings for reasons sellers don't understand.</div>
+        <div class="problem-arrow">→</div>
+      </div>
+      <div class="problem-cell">
+        <div class="problem-num">03</div>
+        <span class="problem-icon">👻</span>
+        <div class="problem-title">Invisible Listings</div>
+        <div class="problem-desc">Great products buried on page 10. Poor titles, missing keywords, unoptimized images — all invisible to buyers.</div>
+        <div class="problem-arrow">→</div>
+      </div>
+      <div class="problem-cell">
+        <div class="problem-num">04</div>
+        <span class="problem-icon">🔥</span>
+        <div class="problem-title">High Return Rates</div>
+        <div class="problem-desc">Returns eat your margins. Poor descriptions, wrong sizing info, and misleading images drive preventable returns.</div>
+        <div class="problem-arrow">→</div>
+      </div>
+      <div class="problem-cell">
+        <div class="problem-num">05</div>
+        <span class="problem-icon">💸</span>
+        <div class="problem-title">Wasted Ad Budget</div>
+        <div class="problem-desc">Spending on ads with no ROI. Wrong targeting, poor creatives, and no bid optimization drain budgets fast.</div>
+        <div class="problem-arrow">→</div>
+      </div>
+      <div class="problem-cell">
+        <div class="problem-num">06</div>
+        <span class="problem-icon">📊</span>
+        <div class="problem-title">No Clear Dashboard</div>
+        <div class="problem-desc">Juggling 3 platforms with no unified view. Missed reports, delayed payments, and ignored health alerts.</div>
+        <div class="problem-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-works" id="how-it-works">
+  <div class="section-inner">
+    <div class="reveal" style="text-align: center; margin-bottom: 0;">
+      <div class="section-eyebrow" style="justify-content: center;">How it works</div>
+      <h2 class="section-title white" style="text-align: center;">Fast results in 3 steps</h2>
+      <p class="section-desc" style="margin: 0 auto; text-align: center; color: rgba(255,255,255,0.38);">No complicated onboarding. Message us, we audit your account, and start fixing within 24 hours.</p>
+    </div>
+    <div class="steps-row reveal">
+      <div class="step">
+        <div class="step-circle fire-bg">
+          <span class="step-num">1</span>
+        </div>
+        <h3 class="step-title">Message us on WhatsApp</h3>
+        <p class="step-desc">Tell us your problem — account suspended, listings rejected, sales dropped. We reply within hours, not days.</p>
+      </div>
+      <div class="step">
+        <div class="step-circle" style="background: rgba(232,69,10,0.1); border: 2px solid rgba(232,69,10,0.3);">
+          <span class="step-num" style="color: var(--fire); font-size: 22px;">2</span>
+        </div>
+        <h3 class="step-title">We audit your account free</h3>
+        <p class="step-desc">Our team does a full account health check — listings, QC status, ads performance, policy flags — at zero cost.</p>
+      </div>
+      <div class="step">
+        <div class="step-circle" style="background: rgba(232,69,10,0.06); border: 2px solid rgba(232,69,10,0.18);">
+          <span class="step-num" style="color: var(--ember); font-size: 22px;">3</span>
+        </div>
+        <h3 class="step-title">Pick a plan, see results</h3>
+        <p class="step-desc">We get to work immediately. Most clients see listing fixes and account improvements within 7–14 days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES WHAT WE DO -->
+<section class="section what-we-do" id="what-we-do" style="background: var(--warm); border-top: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Our services</div>
+      <h2 class="section-title">Everything your<br>marketplace needs</h2>
+    </div>
+    <div class="platforms-row reveal" style="margin-top: 28px;">
+      <div class="platform-pill"><div class="dot" style="background: #F76D2B;"></div> Meesho</div>
+      <div class="platform-pill"><div class="dot" style="background: #FF9900;"></div> Amazon India</div>
+      <div class="platform-pill"><div class="dot" style="background: #2874F0;"></div> Flipkart</div>
+      <div class="platform-pill"><div class="dot" style="background: #00B09B;"></div> ONDC</div>
+      <div class="platform-pill"><div class="dot" style="background: #E8450A;"></div> D2C Website</div>
+    </div>
+    <div class="services-columns reveal">
+      <div>
+        <div class="service-item">
+          <div class="service-icon-box" style="background: var(--fire-50);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+          </div>
+          <div>
+            <div class="service-name">Listing Optimization</div>
+            <div class="service-desc">Titles, bullet points, images, keywords — every element tuned for maximum visibility and conversion.</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon-box" style="background: var(--fire-50);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/><path d="M15.54 8.46a5 5 0 010 7.07M8.46 8.46a5 5 0 000 7.07"/></svg>
+          </div>
+          <div>
+            <div class="service-name">Catalog QC Error Resolution</div>
+            <div class="service-desc">We identify and fix every QC rejection reason so your products go live without delays.</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon-box" style="background: var(--fire-50);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="service-name">Account Health Management</div>
+            <div class="service-desc">Continuous monitoring of health scores, policy compliance, and performance metrics across all platforms.</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon-box" style="background: var(--fire-50);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <div>
+            <div class="service-name">Policy Violation Appeals</div>
+            <div class="service-desc">Fast, professional appeal writing with the right documentation to reinstate suspended accounts.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="service-item">
+          <div class="service-icon-box" style="background: var(--fire-50);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+          </div>
+          <div>
+            <div class="service-name">Ads Management</div>
+            <div class="service-desc">Meta, Amazon, and Flipkart ads — set up, optimized, and monitored for real return on ad spend.</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon-box" style="background: var(--fire-50);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <div>
+            <div class="service-name">D2C Website Build</div>
+            <div class="service-desc">Shopify or WooCommerce store built in 72 hours with payment gateway, mobile design, and basic SEO.</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon-box" style="background: var(--fire-50);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div>
+            <div class="service-name">Growth &amp; SEO Retainer</div>
+            <div class="service-desc">Monthly SEO content, social media management, and email/WhatsApp campaigns for your D2C brand.</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon-box" style="background: var(--fire-50);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          </div>
+          <div>
+            <div class="service-name">Weekly Performance Reports</div>
+            <div class="service-desc">Clear WhatsApp updates every Friday — screenshots, numbers, what changed and what's next.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SHAKTI STRIP -->
+<div style="background: var(--ink); padding: 56px 48px; border-top: 1px solid rgba(255,255,255,0.05);">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--fire); margin-bottom: 12px;">— Why Ecomm Shakti</div>
+      <h3 style="font-family: 'Syne', sans-serif; font-size: clamp(28px, 3vw, 40px); font-weight: 800; color: white; letter-spacing: -1px;">Everything a freelancer can't give you</h3>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: rgba(255,255,255,0.06); border-radius: 16px; overflow: hidden;">
+      <div style="background: rgba(255,255,255,0.03); padding: 28px 24px; text-align: center; transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+        <div style="width: 44px; height: 44px; background: rgba(232,69,10,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: white; margin-bottom: 6px;">Hindi First</div>
+        <div style="font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6;">Native language support. No translation delays, no miscommunication.</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); padding: 28px 24px; text-align: center; transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+        <div style="width: 44px; height: 44px; background: rgba(232,69,10,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/></svg>
+        </div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: white; margin-bottom: 6px;">Same-Day Response</div>
+        <div style="font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6;">Every urgent issue handled within 24 hours — not 3 business days.</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); padding: 28px 24px; text-align: center; transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+        <div style="width: 44px; height: 44px; background: rgba(232,69,10,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: white; margin-bottom: 6px;">Clear SOPs</div>
+        <div style="font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6;">Documented processes. Consistent quality every single month, at scale.</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.03); padding: 28px 24px; text-align: center; transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+        <div style="width: 44px; height: 44px; background: rgba(232,69,10,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg>
+        </div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: white; margin-bottom: 6px;">Grow With You</div>
+        <div style="font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6;">From ₹1,999/mo to a full D2C brand — one partner for your entire journey.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section class="section services" id="pricing">
+  <div class="services-glow"></div>
+  <div class="services-glow-2"></div>
+  <div class="section-inner" style="position: relative; z-index: 1;">
+    <div class="reveal" style="text-align: center;">
+      <div class="section-eyebrow" style="justify-content: center; color: var(--ember);">Transparent pricing</div>
+      <h2 class="section-title white">Plans for every seller</h2>
+      <p class="section-desc" style="margin: 0 auto; text-align: center; color: rgba(255,255,255,0.38);">Start small, grow at your pace. Upgrade or cancel anytime — no lock-ins.</p>
+    </div>
+    <div class="pricing-grid reveal">
+      <!-- Starter -->
+      <div class="pricing-card default">
+        <div class="pricing-badge tier-label">For new sellers</div>
+        <div class="pricing-name">Shakti Starter</div>
+        <div class="pricing-price">₹1,999</div>
+        <div class="pricing-period">per month</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-feature">
+          <div class="feature-check green">✓</div>
+          20 product listings optimized
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check green">✓</div>
+          Title + image optimization
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check green">✓</div>
+          Listing error fixes
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check green">✓</div>
+          Basic account health check
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check green">✓</div>
+          WhatsApp support
+        </div>
+        <a href="https://wa.me/919999999999" class="pricing-cta outline">Get Started →</a>
+      </div>
+
+      <!-- Pro (featured) -->
+      <div class="pricing-card featured">
+        <div class="pricing-badge popular">⚡ Most Popular</div>
+        <div class="pricing-name">Shakti Pro</div>
+        <div class="pricing-price">₹4,999</div>
+        <div class="pricing-period">per month</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-feature">
+          <div class="feature-check fire">✓</div>
+          50 listings per month
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check fire">✓</div>
+          Catalog QC rejection resolution
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check fire">✓</div>
+          Policy violation appeals
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check fire">✓</div>
+          Weekly WhatsApp reports
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check fire">✓</div>
+          Price &amp; MRP correction
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check fire">✓</div>
+          Listing SEO optimization
+        </div>
+        <a href="https://wa.me/919999999999" class="pricing-cta solid">Start with Pro →</a>
+      </div>
+
+      <!-- Max -->
+      <div class="pricing-card default">
+        <div class="pricing-badge tier-label">For serious sellers</div>
+        <div class="pricing-name">Shakti Max</div>
+        <div class="pricing-price">₹9,999</div>
+        <div class="pricing-period">per month</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-feature">
+          <div class="feature-check green">✓</div>
+          Unlimited listings
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check green">✓</div>
+          Full account management
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check green">✓</div>
+          Ads management (Meta / Amazon)
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check green">✓</div>
+          Account health monitoring
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check green">✓</div>
+          Growth strategy consultation
+        </div>
+        <div class="pricing-feature">
+          <div class="feature-check green">✓</div>
+          Same-day priority support
+        </div>
+        <a href="https://wa.me/919999999999" class="pricing-cta outline">Get Max →</a>
+      </div>
+    </div>
+
+    <!-- Add-ons note -->
+    <div style="margin-top: 32px; text-align: center; color: rgba(255,255,255,0.28); font-size: 14px;" class="reveal">
+      <span style="color: var(--ember); font-weight: 600;">Add-ons available:</span> &nbsp; D2C Website Build — ₹9,999 one-time &nbsp;·&nbsp; SEO + Social Retainer — ₹7,999/month &nbsp;·&nbsp; Both sold only to existing clients
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS BANNER -->
+<section class="results-banner" id="results">
+  <div class="results-banner-glow"></div>
+  <div class="results-inner">
+    <div class="results-text reveal">
+      <div class="section-eyebrow" style="color: var(--gold);">What you get</div>
+      <h2 class="section-title white" style="margin-bottom: 16px;">Real results,<br>not promises</h2>
+      <p class="section-desc" style="color: rgba(255,255,255,0.4); margin-bottom: 32px;">We work on your account like it's our own business — because your growth is how we grow.</p>
+      <ul class="result-points">
+        <li>Listings go live faster with fewer QC rejections</li>
+        <li>Account health scores stabilized and maintained</li>
+        <li>Suspended accounts appealed and reinstated</li>
+        <li>Sales visibility improved through listing SEO</li>
+        <li>Weekly updates so you always know what's happening</li>
+        <li>Hindi support — no language barrier, ever</li>
+      </ul>
+    </div>
+    <div class="outcomes-grid reveal">
+      <div class="outcome-card">
+        <div class="outcome-icon">⚡</div>
+        <div class="outcome-title">24-hour Response</div>
+        <div class="outcome-desc">Every urgent request — suspension, QC block — handled within 24 hours of receiving.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">🇮🇳</div>
+        <div class="outcome-title">Hindi Support</div>
+        <div class="outcome-desc">Work with a team that understands your language and your market. No translation barrier.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">📱</div>
+        <div class="outcome-title">WhatsApp First</div>
+        <div class="outcome-desc">All communication on WhatsApp — the platform you already use. No new tools to learn.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">🔒</div>
+        <div class="outcome-title">No Lock-in</div>
+        <div class="outcome-desc">Month-to-month plans. Cancel anytime. We earn your trust every month, not just at signup.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials" id="testimonials">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Seller stories</div>
+      <h2 class="section-title">Sellers who got their<br>business back on track</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">
+          <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
+        </div>
+        <p class="testi-quote">"My Meesho account was suspended for 2 weeks and I had no idea why. Ecomm Shakti filed the appeal and got it restored in 4 days. Bohot fast kaam kiya."</p>
+        <div class="testi-divider"></div>
+        <div class="testi-author">
+          <div class="testi-avatar">RK</div>
+          <div>
+            <div class="testi-name">Rakesh Kumar</div>
+            <div class="testi-role">Fashion Seller, Jaipur</div>
+          </div>
+          <span class="testi-platform">Meesho</span>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
+        </div>
+        <p class="testi-quote">"I was wasting ₹8,000 a month on Amazon ads with no return. After Shakti Pro, my ROAS went up in the first month itself. Should have done this earlier."</p>
+        <div class="testi-divider"></div>
+        <div class="testi-author">
+          <div class="testi-avatar">SP</div>
+          <div>
+            <div class="testi-name">Sunita Patel</div>
+            <div class="testi-role">Home Decor Seller, Surat</div>
+          </div>
+          <span class="testi-platform">Amazon</span>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
+        </div>
+        <p class="testi-quote">"50 products were stuck in QC rejection for a month. Ecomm Shakti resolved all of them in one week. Now I use them for all my new listings too."</p>
+        <div class="testi-divider"></div>
+        <div class="testi-author">
+          <div class="testi-avatar">AM</div>
+          <div>
+            <div class="testi-name">Anita Mehta</div>
+            <div class="testi-role">Beauty &amp; Skincare Seller, Pune</div>
+          </div>
+          <span class="testi-platform">Flipkart</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Ready to grow?</div>
+    <h2 class="cta-title">Start with a<br>free audit today</h2>
+    <p class="cta-sub">Message us on WhatsApp. We'll review your account, spot what's broken, and tell you exactly how to fix it — for free.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/919999999999" class="btn-white">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Free Audit on WhatsApp
+      </a>
+      <a href="#pricing" class="btn-outline-white">View All Plans</a>
+    </div>
+  </div>
+</section>
+
+<!-- FLOATING WA BUTTON (mobile) -->
+<a href="https://wa.me/919999999999" id="wa-float" style="
+  position: fixed; bottom: 24px; right: 24px; z-index: 200;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25D366; color: white;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+" onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 12px 32px rgba(37,211,102,0.55), 0 4px 12px rgba(0,0,0,0.2)'"
+   onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 24px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.15)'">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">
+            <svg width="18" height="20" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 1C10 1 4 6.5 4 12C4 15.314 6.686 18 10 18C13.314 18 16 15.314 16 12C16 9 14 7 14 7C14 7 13.5 10 11.5 10.5C11.5 10.5 13 8 11 5C11 5 10.5 8 8.5 9C8.5 9 7 7 10 1Z" fill="white" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="footer-brand-name">Ecomm Shakti<span class="dot">.</span></div>
+        </div>
+        <p class="footer-tagline">Power for every Indian marketplace seller.</p>
+        <a href="https://wa.me/919999999999" class="footer-whatsapp">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#pricing">Shakti Starter</a></li>
+          <li><a href="#pricing">Shakti Pro</a></li>
+          <li><a href="#pricing">Shakti Max</a></li>
+          <li><a href="#what-we-do">D2C Website</a></li>
+          <li><a href="#what-we-do">Growth Retainer</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Platforms</div>
+        <ul class="footer-links">
+          <li><a href="#">Meesho</a></li>
+          <li><a href="#">Amazon India</a></li>
+          <li><a href="#">Flipkart</a></li>
+          <li><a href="#">ONDC</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 <strong>Ecomm Shakti</strong>. Built for Indian sellers.</p>
+      <p class="footer-copy" style="font-size: 12px;">Meesho, Amazon, and Flipkart are registered trademarks of their respective owners.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.04, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Fallback: reveal anything in viewport on load
+requestAnimationFrame(() => {
+  document.querySelectorAll('.reveal').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 200) el.classList.add('visible');
+  });
+});
+
+// Nav scroll behavior
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    nav.style.background = 'rgba(15,13,11,0.97)';
+  } else {
+    nav.style.background = 'rgba(15,13,11,0.92)';
+  }
+}, { passive: true });
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecom Shakti — Brand Kit 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════ */
+:root {
+  --fire:   #E8450A;
+  --ember:  #FF6B35;
+  --gold:   #F0A500;
+  --ink:    #0F0D0B;
+  --smoke:  #2A2520;
+  --warm:   #F7F3EE;
+  --cream:  #FDF9F4;
+  --stone:  #8C8479;
+  --border: #E4DDD4;
+
+  --fire-50:  #FDF0EB;
+  --fire-100: #FAD5C5;
+  --fire-200: #F4A883;
+  --fire-400: #E8450A;
+  --fire-700: #B83208;
+  --fire-900: #6B1C04;
+}
+
+/* ═══════════════════════════════
+   RESET & BASE
+═══════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Onest', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════
+   NAV SIDEBAR
+═══════════════════════════════ */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 220px;
+  height: 100vh;
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  padding: 32px 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  padding: 0 24px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 20px;
+}
+
+.sidebar-brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.3px;
+  line-height: 1;
+}
+.sidebar-brand .dot { color: var(--fire); }
+
+.sidebar-sub {
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.nav-section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding: 0 24px;
+  margin: 12px 0 6px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 24px;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+  border-left: 2px solid transparent;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: white;
+  border-left-color: var(--fire);
+  background: rgba(255,255,255,0.04);
+}
+
+.nav-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding: 20px 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.version-tag {
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════ */
+.main {
+  margin-left: 220px;
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════
+   PAGE HERO
+═══════════════════════════════ */
+.page-hero {
+  background: var(--ink);
+  padding: 72px 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,69,10,0.18) 0%, transparent 70%);
+  top: -120px; right: -100px;
+  pointer-events: none;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,165,0,0.1) 0%, transparent 70%);
+  bottom: -60px; left: 200px;
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--fire);
+  margin-bottom: 16px;
+}
+
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 800;
+  color: white;
+  line-height: 0.92;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title .fire-text { color: var(--fire); }
+
+.hero-desc {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.45);
+  max-width: 540px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 32px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-meta-item { }
+.hero-meta-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 4px;
+}
+.hero-meta-value {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.3px;
+}
+
+/* ═══════════════════════════════
+   CONTENT SECTIONS
+═══════════════════════════════ */
+.content { padding: 64px; }
+
+.kit-section {
+  margin-bottom: 80px;
+  scroll-margin-top: 32px;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--fire);
+  letter-spacing: 1px;
+  min-width: 28px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+  line-height: 1;
+}
+
+.section-desc {
+  font-size: 13px;
+  color: var(--stone);
+  margin-top: 6px;
+}
+
+/* ═══════════════════════════════
+   LOGO SECTION
+═══════════════════════════════ */
+.logo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.logo-card {
+  border-radius: 14px;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-card-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.logo-card.dark {
+  background: var(--ink);
+}
+.logo-card.dark .logo-card-label { color: rgba(255,255,255,0.2); }
+
+.logo-card.light {
+  background: var(--warm);
+  border: 1px solid var(--border);
+}
+.logo-card.light .logo-card-label { color: var(--stone); }
+
+.logo-card.fire-bg {
+  background: var(--fire);
+}
+.logo-card.fire-bg .logo-card-label { color: rgba(255,255,255,0.5); }
+
+.logo-card.white-bg {
+  background: white;
+  border: 1px solid var(--border);
+}
+.logo-card.white-bg .logo-card-label { color: var(--stone); }
+
+/* Logo mark SVG inline */
+.logo-lockup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-icon-box {
+  width: 52px; height: 52px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-icon-box.on-dark { background: var(--fire); }
+.logo-icon-box.on-light { background: var(--fire); }
+.logo-icon-box.on-fire { background: rgba(255,255,255,0.2); }
+
+.logo-words { display: flex; flex-direction: column; }
+
+.logo-ecom-word {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.logo-ecom-word.on-dark { color: rgba(255,255,255,0.4); }
+.logo-ecom-word.on-light { color: var(--stone); }
+.logo-ecom-word.on-fire { color: rgba(255,255,255,0.6); }
+.logo-ecom-word.on-white { color: var(--stone); }
+
+.logo-shakti-word {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.5px;
+}
+.logo-shakti-word.lg { font-size: 38px; }
+.logo-shakti-word.md { font-size: 28px; }
+.logo-shakti-word.sm { font-size: 20px; }
+
+.logo-shakti-word.on-dark { color: white; }
+.logo-shakti-word.on-light { color: var(--ink); }
+.logo-shakti-word.on-fire { color: white; }
+.logo-shakti-word.on-white { color: var(--ink); }
+
+.logo-dot-fire { color: var(--fire); }
+.logo-dot-gold { color: var(--gold); }
+.logo-dot-white { color: rgba(255,255,255,0.6); }
+
+.logo-tagline-text {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 13px;
+  margin-top: 10px;
+  padding-left: 66px;
+}
+.logo-tagline-text.on-dark { color: rgba(255,255,255,0.3); }
+.logo-tagline-text.on-light { color: var(--stone); }
+.logo-tagline-text.on-fire { color: rgba(255,255,255,0.55); }
+.logo-tagline-text.on-white { color: var(--stone); }
+
+/* Icon-only and monogram */
+.logo-variants-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.logo-var-cell {
+  background: var(--warm);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-var-cell.dark-cell {
+  background: var(--ink);
+  border-color: rgba(255,255,255,0.06);
+}
+
+.var-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--stone);
+  text-align: center;
+}
+
+.var-label.on-dark { color: rgba(255,255,255,0.25); }
+
+.monogram {
+  font-family: 'Syne', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* Download button */
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: white;
+  font-family: 'Onest', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 9px 18px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.download-btn:hover { background: var(--smoke); }
+.download-btn.fire { background: var(--fire); }
+.download-btn.fire:hover { background: var(--fire-700); }
+
+.download-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+/* ═══════════════════════════════
+   COLOR SECTION
+═══════════════════════════════ */
+.color-primary-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.color-tile {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.color-tile:hover { transform: translateY(-3px); }
+
+.color-swatch {
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+  padding: 8px 10px;
+}
+
+.color-hex {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Onest', sans-serif;
+  letter-spacing: 0.5px;
+  mix-blend-mode: luminosity;
+  opacity: 0.7;
+}
+
+.color-info {
+  padding: 10px 12px;
+  background: var(--cream);
+}
+
+.color-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.color-role { font-size: 11px; color: var(--stone); }
+
+/* Tint scale */
+.tint-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 10px;
+}
+
+.tint-scale {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.tint-stop {
+  flex: 1;
+  height: 48px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 6px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Color on backgrounds */
+.color-usage-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.color-usage-card {
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 13px;
+}
+
+/* Copied tooltip */
+.copy-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--ink);
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: all 0.25s;
+  pointer-events: none;
+  z-index: 9999;
+}
+.copy-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ═══════════════════════════════
+   TYPOGRAPHY SECTION
+═══════════════════════════════ */
+.font-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.font-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  background: white;
+}
+
+.font-name {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+.font-tags { display: flex; gap: 6px; }
+.font-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--fire-50);
+  color: var(--fire-700);
+  letter-spacing: 0.3px;
+}
+.font-tag.free {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.font-card-body { padding: 28px 24px; }
+
+.font-specimen-display {
+  font-family: 'Syne', sans-serif;
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 0.9;
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+
+.font-specimen-serif {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 30px;
+  color: var(--smoke);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.font-specimen-body {
+  font-family: 'Onest', sans-serif;
+  font-size: 16px;
+  color: var(--smoke);
+  line-height: 1.75;
+  max-width: 560px;
+}
+
+.font-alphabet {
+  font-size: 13px;
+  color: var(--stone);
+  letter-spacing: 2px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  word-break: break-all;
+  line-height: 2;
+}
+
+/* Type scale table */
+.type-scale {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.type-scale-row {
+  display: grid;
+  grid-template-columns: 100px 80px 80px 1fr;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  gap: 16px;
+}
+.type-scale-row:last-child { border-bottom: none; }
+.type-scale-row.header {
+  background: var(--smoke);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  padding: 12px 20px;
+}
+
+.ts-role { font-size: 12px; font-weight: 600; color: var(--stone); }
+.ts-size { font-size: 12px; color: var(--stone); font-family: 'Onest', sans-serif; }
+.ts-weight { font-size: 12px; color: var(--stone); }
+
+/* ═══════════════════════════════
+   VOICE & COPY
+═══════════════════════════════ */
+.voice-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.voice-tile {
+  background: var(--ink);
+  border-radius: 12px;
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.voice-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+
+.voice-trait {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.voice-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+.copy-examples {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.copy-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.copy-card-header {
+  padding: 10px 16px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.copy-card-header.good { background: #e6f9f0; color: #1a6645; }
+.copy-card-header.bad  { background: #fde8e8; color: #8b1a1a; }
+
+.copy-card-body {
+  padding: 16px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--smoke);
+  background: var(--cream);
+  min-height: 80px;
+}
+
+/* ═══════════════════════════════
+   UI COMPONENTS
+═══════════════════════════════ */
+.component-section { margin-bottom: 32px; }
+
+.component-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 14px;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Button styles */
+.es-btn {
+  font-family: 'Onest', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  padding: 10px 22px;
+  border-radius: 7px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.es-btn-primary { background: var(--fire); color: white; }
+.es-btn-primary:hover { background: var(--fire-700); }
+
+.es-btn-secondary {
+  background: transparent;
+  color: var(--fire);
+  border: 1.5px solid var(--fire);
+}
+.es-btn-secondary:hover { background: var(--fire-50); }
+
+.es-btn-dark { background: var(--ink); color: white; }
+.es-btn-dark:hover { background: var(--smoke); }
+
+.es-btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+.es-btn-ghost:hover { background: var(--warm); }
+
+.es-btn-sm { padding: 7px 16px; font-size: 12px; }
+.es-btn-lg { padding: 14px 28px; font-size: 15px; }
+
+/* Badges */
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.es-badge {
+  display: inline-block;
+  font-family: 'Onest', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 4px 11px;
+  border-radius: 20px;
+}
+
+.es-badge-fire  { background: var(--fire-50);  color: var(--fire-700); }
+.es-badge-gold  { background: #fff8e6;          color: #8A5C00; }
+.es-badge-green { background: #e6f9f0;          color: #1a6645; }
+.es-badge-ink   { background: var(--ink);       color: white; }
+.es-badge-stone { background: var(--warm); color: var(--stone); border: 1px solid var(--border); }
+
+/* Cards */
+.card-showcase {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.pricing-card {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform 0.2s;
+}
+.pricing-card:hover { transform: translateY(-4px); }
+.pricing-card.featured { border-color: var(--fire); border-width: 2px; }
+
+.pc-header {
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pc-header.dark-h { background: var(--ink); }
+.pc-header.fire-h { background: var(--fire); }
+
+.pc-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+.pc-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.8);
+}
+
+.pc-body { padding: 18px; background: white; }
+
+.pc-price {
+  font-family: 'Syne', sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--fire);
+  line-height: 1;
+}
+
+.pc-per { font-size: 12px; color: var(--stone); margin-top: 2px; margin-bottom: 14px; }
+
+.pc-divider { height: 1px; background: var(--border); margin: 12px 0; }
+
+.pc-item {
+  font-size: 12.5px;
+  color: var(--smoke);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--warm);
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+.pc-item:last-of-type { border-bottom: none; }
+.pc-check { color: #1a6645; font-size: 12px; margin-top: 2px; flex-shrink: 0; }
+
+.pc-cta {
+  width: 100%;
+  margin-top: 14px;
+  font-family: 'Onest', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 11px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.pc-cta.fire-cta { background: var(--fire); color: white; }
+.pc-cta.fire-cta:hover { background: var(--fire-700); }
+.pc-cta.ink-cta { background: var(--ink); color: white; }
+.pc-cta.ink-cta:hover { background: var(--smoke); }
+
+/* ═══════════════════════════════
+   BRAND PATTERNS
+═══════════════════════════════ */
+.pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.pattern-tile {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.pattern-preview {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.pattern-label {
+  padding: 12px 14px;
+  background: var(--cream);
+}
+.pattern-title { font-size: 13px; font-weight: 600; color: var(--ink); }
+.pattern-desc { font-size: 11px; color: var(--stone); margin-top: 2px; }
+
+/* Grid pattern */
+.pattern-grid-bg {
+  background: var(--ink);
+  background-image:
+    linear-gradient(rgba(232,69,10,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,69,10,0.1) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Border left accent */
+.accent-border-demo {
+  background: var(--ink);
+  border-left: 3px solid var(--fire);
+  padding: 12px 16px;
+  width: 80%;
+}
+
+/* ═══════════════════════════════
+   SOCIAL MEDIA SPECS
+═══════════════════════════════ */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.social-spec-card {
+  background: var(--warm);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.social-spec-preview {
+  background: var(--ink);
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-spec-body { padding: 14px; }
+.social-platform { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.social-dim { font-size: 11px; color: var(--stone); line-height: 1.8; }
+
+/* ═══════════════════════════════
+   DIVIDER
+═══════════════════════════════ */
+.kit-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0 0 80px;
+}
+
+/* ═══════════════════════════════
+   FOOTER
+═══════════════════════════════ */
+.kit-footer {
+  background: var(--ink);
+  padding: 48px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.3px;
+}
+.footer-brand .dot { color: var(--fire); }
+
+.footer-meta {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  line-height: 1.8;
+  text-align: right;
+}
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
+@media (max-width: 960px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .content { padding: 32px 24px; }
+  .page-hero { padding: 48px 24px; }
+  .logo-grid,
+  .color-primary-row { grid-template-columns: 1fr 1fr; }
+  .logo-variants-row,
+  .voice-grid,
+  .card-showcase,
+  .pattern-grid,
+  .social-grid { grid-template-columns: 1fr 1fr; }
+  .type-scale-row { grid-template-columns: 80px 70px 1fr; }
+  .type-scale-row .ts-weight { display: none; }
+  .copy-examples { grid-template-columns: 1fr; }
+  .color-usage-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .logo-grid,
+  .card-showcase,
+  .pattern-grid,
+  .social-grid,
+  .voice-grid { grid-template-columns: 1fr; }
+  .color-primary-row { grid-template-columns: repeat(3, 1fr); }
+  .logo-variants-row { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- COPY TOAST -->
+<div class="copy-toast" id="copyToast">Copied to clipboard!</div>
+
+<!-- ════════════════════════
+     SIDEBAR NAV
+════════════════════════ -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-brand">Ecom Shakti<span class="dot">.</span></div>
+    <div class="sidebar-sub">Brand Kit 2026</div>
+  </div>
+
+  <div class="nav-section-label">Identity</div>
+  <a href="#logo"   class="nav-link active"><span class="nav-dot"></span>Logo System</a>
+  <a href="#colors" class="nav-link"><span class="nav-dot"></span>Color Palette</a>
+  <a href="#type"   class="nav-link"><span class="nav-dot"></span>Typography</a>
+
+  <div class="nav-section-label">Expression</div>
+  <a href="#voice"      class="nav-link"><span class="nav-dot"></span>Brand Voice</a>
+  <a href="#components" class="nav-link"><span class="nav-dot"></span>UI Components</a>
+  <a href="#patterns"   class="nav-link"><span class="nav-dot"></span>Visual Patterns</a>
+  <a href="#social"     class="nav-link"><span class="nav-dot"></span>Social Media</a>
+
+  <div class="sidebar-bottom">
+    <div class="version-tag">Version 1.0 · April 2026</div>
+  </div>
+</nav>
+
+<!-- ════════════════════════
+     MAIN
+════════════════════════ -->
+<div class="main">
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="hero-eyebrow">Brand Identity System</div>
+    <h1 class="hero-title">Ecom<br><span class="fire-text">Shakti.</span></h1>
+    <p class="hero-desc">Complete brand guidelines — logo, colors, typography, voice, UI components, and social media templates. Everything you need to build a consistent brand across all touchpoints.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Primary Color</div>
+        <div class="hero-meta-value" style="color: var(--fire);">Fire #E8450A</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Display Font</div>
+        <div class="hero-meta-value">Syne 800</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Body Font</div>
+        <div class="hero-meta-value">Onest 400</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Tagline</div>
+        <div class="hero-meta-value" style="font-family:'Instrument Serif',serif; font-style:italic; font-size:14px;">Powering India's Sellers</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ══════════════════
+         01 LOGO SYSTEM
+    ══════════════════ -->
+    <section class="kit-section" id="logo">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <div>
+          <div class="section-title">Logo System</div>
+          <div class="section-desc">Primary lockup, variants, and clear space rules</div>
+        </div>
+      </div>
+
+      <!-- Primary logos on all backgrounds -->
+      <div class="logo-grid">
+
+        <!-- Dark bg -->
+        <div class="logo-card dark">
+          <div class="logo-card-label" style="color:rgba(255,255,255,0.2);">On dark · Primary use</div>
+          <div class="logo-lockup">
+            <div class="logo-icon-box on-dark">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="M7 25 L16 5 L25 25" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10.5 18 L21.5 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="25" cy="10" r="3.5" fill="#F0A500"/>
+              </svg>
+            </div>
+            <div class="logo-words">
+              <span class="logo-ecom-word on-dark">Ecom</span>
+              <span class="logo-shakti-word lg on-dark">Shakti<span class="logo-dot-fire">.</span></span>
+            </div>
+          </div>
+          <div class="logo-tagline-text on-dark">Powering India's Marketplace Sellers</div>
+        </div>
+
+        <!-- Light / warm bg -->
+        <div class="logo-card light">
+          <div class="logo-card-label">On warm white · Secondary use</div>
+          <div class="logo-lockup">
+            <div class="logo-icon-box on-light">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="M7 25 L16 5 L25 25" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10.5 18 L21.5 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="25" cy="10" r="3.5" fill="#F0A500"/>
+              </svg>
+            </div>
+            <div class="logo-words">
+              <span class="logo-ecom-word on-light">Ecom</span>
+              <span class="logo-shakti-word lg on-light">Shakti<span class="logo-dot-fire">.</span></span>
+            </div>
+          </div>
+          <div class="logo-tagline-text on-light">Powering India's Marketplace Sellers</div>
+        </div>
+
+        <!-- Fire bg -->
+        <div class="logo-card fire-bg">
+          <div class="logo-card-label" style="color:rgba(255,255,255,0.5);">On brand orange</div>
+          <div class="logo-lockup">
+            <div class="logo-icon-box on-fire">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="M7 25 L16 5 L25 25" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10.5 18 L21.5 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="25" cy="10" r="3.5" fill="rgba(255,255,255,0.6)"/>
+              </svg>
+            </div>
+            <div class="logo-words">
+              <span class="logo-ecom-word on-fire">Ecom</span>
+              <span class="logo-shakti-word lg on-fire">Shakti<span class="logo-dot-white">.</span></span>
+            </div>
+          </div>
+          <div class="logo-tagline-text on-fire">Powering India's Marketplace Sellers</div>
+        </div>
+
+        <!-- Pure white bg -->
+        <div class="logo-card white-bg">
+          <div class="logo-card-label">On pure white</div>
+          <div class="logo-lockup">
+            <div class="logo-icon-box on-light">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="M7 25 L16 5 L25 25" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10.5 18 L21.5 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="25" cy="10" r="3.5" fill="#F0A500"/>
+              </svg>
+            </div>
+            <div class="logo-words">
+              <span class="logo-ecom-word on-white">Ecom</span>
+              <span class="logo-shakti-word lg on-white">Shakti<span class="logo-dot-fire">.</span></span>
+            </div>
+          </div>
+          <div class="logo-tagline-text on-white">Powering India's Marketplace Sellers</div>
+        </div>
+
+      </div>
+
+      <!-- Size variants -->
+      <div class="logo-variants-row">
+        <!-- Compact -->
+        <div class="logo-var-cell dark-cell">
+          <div class="logo-lockup" style="gap:8px;">
+            <div style="width:30px;height:30px;background:var(--fire);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 32 32" fill="none"><path d="M7 25L16 5L25 25" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.5 18L21.5 18" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="25" cy="10" r="3.5" fill="#F0A500"/></svg>
+            </div>
+            <span class="logo-shakti-word sm on-dark">Shakti<span class="logo-dot-fire">.</span></span>
+          </div>
+          <div class="var-label on-dark">Compact</div>
+        </div>
+
+        <!-- Icon only -->
+        <div class="logo-var-cell dark-cell">
+          <div style="width:52px;height:52px;background:var(--fire);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M7 25L16 5L25 25" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.5 18L21.5 18" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="25" cy="10" r="3.5" fill="#F0A500"/></svg>
+          </div>
+          <div class="var-label on-dark">Icon only</div>
+        </div>
+
+        <!-- Monogram -->
+        <div class="logo-var-cell dark-cell">
+          <div class="monogram" style="color:white;">ES<span style="color:var(--fire);">.</span></div>
+          <div class="var-label on-dark">Monogram</div>
+        </div>
+
+        <!-- Text only -->
+        <div class="logo-var-cell">
+          <span class="logo-shakti-word md on-light">Ecom Shakti<span class="logo-dot-fire">.</span></span>
+          <div class="var-label">Wordmark</div>
+        </div>
+      </div>
+
+      <!-- Logo rules -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
+        <div style="background:#e6f9f0;border-radius:10px;overflow:hidden;">
+          <div style="padding:8px 14px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#1a6645;">Do</div>
+          <div style="padding:14px 16px;font-size:13px;color:var(--smoke);line-height:1.9;">
+            ✓ Use on dark, warm-white, or orange backgrounds<br>
+            ✓ Always keep the orange dot — it's the brand mark<br>
+            ✓ Minimum logo height: 28px<br>
+            ✓ Maintain clear space = height of the "E" around the logo
+          </div>
+        </div>
+        <div style="background:#fde8e8;border-radius:10px;overflow:hidden;">
+          <div style="padding:8px 14px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8b1a1a;">Don't</div>
+          <div style="padding:14px 16px;font-size:13px;color:var(--smoke);line-height:1.9;">
+            ✗ Don't stretch, skew, or rotate the logo<br>
+            ✗ Don't change the orange to any other color<br>
+            ✗ Don't place on busy or low-contrast backgrounds<br>
+            ✗ Don't use icon alone below 40px
+          </div>
+        </div>
+      </div>
+
+      <div class="download-row">
+        <button class="download-btn fire" onclick="downloadLogoSVG('dark')">↓ Logo SVG (Dark)</button>
+        <button class="download-btn fire" onclick="downloadLogoSVG('light')">↓ Logo SVG (Light)</button>
+        <button class="download-btn" onclick="downloadIconSVG()">↓ Icon SVG</button>
+      </div>
+    </section>
+
+    <div class="kit-divider"></div>
+
+    <!-- ══════════════════
+         02 COLOR PALETTE
+    ══════════════════ -->
+    <section class="kit-section" id="colors">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <div>
+          <div class="section-title">Color Palette</div>
+          <div class="section-desc">Click any swatch to copy the hex code</div>
+        </div>
+      </div>
+
+      <div class="color-primary-row">
+        <div class="color-tile" onclick="copyColor('#E8450A')">
+          <div class="color-swatch" style="background:#E8450A;">
+            <span class="color-hex" style="color:rgba(255,255,255,0.8);">#E8450A</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Fire</div>
+            <div class="color-role">Primary brand</div>
+          </div>
+        </div>
+        <div class="color-tile" onclick="copyColor('#FF6B35')">
+          <div class="color-swatch" style="background:#FF6B35;">
+            <span class="color-hex" style="color:rgba(255,255,255,0.8);">#FF6B35</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Ember</div>
+            <div class="color-role">Hover / accent</div>
+          </div>
+        </div>
+        <div class="color-tile" onclick="copyColor('#F0A500')">
+          <div class="color-swatch" style="background:#F0A500;">
+            <span class="color-hex" style="color:rgba(255,255,255,0.85);">#F0A500</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Gold</div>
+            <div class="color-role">Achievement / stars</div>
+          </div>
+        </div>
+        <div class="color-tile" onclick="copyColor('#0F0D0B')">
+          <div class="color-swatch" style="background:#0F0D0B;">
+            <span class="color-hex" style="color:rgba(255,255,255,0.4);">#0F0D0B</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Ink</div>
+            <div class="color-role">Text / dark bg</div>
+          </div>
+        </div>
+        <div class="color-tile" onclick="copyColor('#F7F3EE')">
+          <div class="color-swatch" style="background:#F7F3EE;border-top:1px solid var(--border);">
+            <span class="color-hex" style="color:rgba(0,0,0,0.35);">#F7F3EE</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Warm</div>
+            <div class="color-role">Background</div>
+          </div>
+        </div>
+        <div class="color-tile" onclick="copyColor('#8C8479')">
+          <div class="color-swatch" style="background:#8C8479;">
+            <span class="color-hex" style="color:rgba(255,255,255,0.8);">#8C8479</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Stone</div>
+            <div class="color-role">Subtext / muted</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fire tint scale -->
+      <div class="tint-label">Fire tint scale — use lighter tints for backgrounds, darker for text on light</div>
+      <div class="tint-scale">
+        <div class="tint-stop" style="background:#FDF0EB;color:#B83208;">50</div>
+        <div class="tint-stop" style="background:#FAD5C5;color:#B83208;">100</div>
+        <div class="tint-stop" style="background:#F4A883;color:#7A2006;">200</div>
+        <div class="tint-stop" style="background:#E8450A;color:white;">400</div>
+        <div class="tint-stop" style="background:#B83208;color:white;">700</div>
+        <div class="tint-stop" style="background:#6B1C04;color:white;">900</div>
+      </div>
+
+      <!-- Gold tint scale -->
+      <div class="tint-label">Gold tint scale</div>
+      <div class="tint-scale">
+        <div class="tint-stop" style="background:#FFF8E6;color:#8A5C00;">50</div>
+        <div class="tint-stop" style="background:#FFE7A0;color:#8A5C00;">100</div>
+        <div class="tint-stop" style="background:#F9C840;color:#6B4400;">200</div>
+        <div class="tint-stop" style="background:#F0A500;color:white;">400</div>
+        <div class="tint-stop" style="background:#B87800;color:white;">700</div>
+        <div class="tint-stop" style="background:#704800;color:white;">900</div>
+      </div>
+
+      <!-- Color usage examples -->
+      <div class="tint-label" style="margin-top:8px;">Color usage on backgrounds</div>
+      <div class="color-usage-row">
+        <div class="color-usage-card" style="background:var(--ink);">
+          <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:white;margin-bottom:6px;">Dark background</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.5);">Body text on Ink #0F0D0B</div>
+          <div style="margin-top:10px;display:inline-block;background:var(--fire);color:white;font-size:12px;font-weight:600;padding:5px 12px;border-radius:5px;">Fire CTA</div>
+        </div>
+        <div class="color-usage-card" style="background:var(--fire);">
+          <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:white;margin-bottom:6px;">Brand orange</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.65);">Only white text on Fire</div>
+          <div style="margin-top:10px;display:inline-block;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:600;padding:5px 12px;border-radius:5px;">Ghost CTA</div>
+        </div>
+        <div class="color-usage-card" style="background:var(--warm);border:1px solid var(--border);">
+          <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:6px;">Warm white</div>
+          <div style="font-size:13px;color:var(--stone);">Body text on Warm #F7F3EE</div>
+          <div style="margin-top:10px;display:inline-block;background:var(--fire);color:white;font-size:12px;font-weight:600;padding:5px 12px;border-radius:5px;">Fire CTA</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="kit-divider"></div>
+
+    <!-- ══════════════════
+         03 TYPOGRAPHY
+    ══════════════════ -->
+    <section class="kit-section" id="type">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <div>
+          <div class="section-title">Typography</div>
+          <div class="section-desc">Three fonts — three roles. All free on Google Fonts.</div>
+        </div>
+      </div>
+
+      <!-- Syne -->
+      <div class="font-card">
+        <div class="font-card-header">
+          <div class="font-name">Syne — Display & Headlines</div>
+          <div class="font-tags">
+            <span class="font-tag">Weight 800</span>
+            <span class="font-tag free">Google Fonts · Free</span>
+          </div>
+        </div>
+        <div class="font-card-body">
+          <div class="font-specimen-display">Apni Sales<br>2X Karein.</div>
+          <div class="font-alphabet" style="font-family:'Syne',sans-serif;font-weight:800;">
+            A B C D E F G H I J K L M N O P Q R S T U V W X Y Z<br>
+            a b c d e f g h i j k l m n o p q r s t u v w x y z<br>
+            0 1 2 3 4 5 6 7 8 9 ₹ % . , ! ?
+          </div>
+        </div>
+      </div>
+
+      <!-- Instrument Serif -->
+      <div class="font-card">
+        <div class="font-card-header">
+          <div class="font-name">Instrument Serif — Accent & Quotes</div>
+          <div class="font-tags">
+            <span class="font-tag">Italic only</span>
+            <span class="font-tag free">Google Fonts · Free</span>
+          </div>
+        </div>
+        <div class="font-card-body">
+          <div class="font-specimen-serif">"Powering India's marketplace sellers,<br>one account at a time."</div>
+          <div class="font-alphabet" style="font-family:'Instrument Serif',serif;font-style:italic;">
+            Use for taglines, testimonials, pull-quotes, and the brand tagline.<br>
+            Never use for body copy or UI labels.
+          </div>
+        </div>
+      </div>
+
+      <!-- Onest -->
+      <div class="font-card">
+        <div class="font-card-header">
+          <div class="font-name">Onest — Body & UI</div>
+          <div class="font-tags">
+            <span class="font-tag">Weight 300–700</span>
+            <span class="font-tag free">Google Fonts · Free</span>
+          </div>
+        </div>
+        <div class="font-card-body">
+          <div class="font-specimen-body">We fix your listings, resolve QC rejections, and manage your account on Meesho, Flipkart, and Amazon — so you can focus on growing your business, not firefighting platform problems.</div>
+          <div class="font-alphabet" style="font-family:'Onest',sans-serif;">
+            A B C D E F G H I J K L M N O P Q R S T U V W X Y Z · 0–9 · ₹ % @
+          </div>
+        </div>
+      </div>
+
+      <!-- Type scale -->
+      <div class="tint-label" style="margin-top:8px;">Type scale</div>
+      <div class="type-scale">
+        <div class="type-scale-row header">
+          <div>Role</div>
+          <div>Size</div>
+          <div>Weight</div>
+          <div>Sample</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="ts-role">Hero</div>
+          <div class="ts-size">72–80px</div>
+          <div class="ts-weight">Syne 800</div>
+          <div style="font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--ink);line-height:1;">Shakti.</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="ts-role">H1</div>
+          <div class="ts-size">40–48px</div>
+          <div class="ts-weight">Syne 800</div>
+          <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--ink);line-height:1.1;">Apni Sales 2X Karein</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="ts-role">H2</div>
+          <div class="ts-size">28–32px</div>
+          <div class="ts-weight">Syne 700</div>
+          <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--ink);">Account Management</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="ts-role">H3</div>
+          <div class="ts-size">20–22px</div>
+          <div class="ts-weight">Syne 600</div>
+          <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:600;color:var(--ink);">Shakti Pro Plan</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="ts-role">Body</div>
+          <div class="ts-size">15–16px</div>
+          <div class="ts-weight">Onest 400</div>
+          <div style="font-family:'Onest',sans-serif;font-size:15px;color:var(--smoke);">We manage your marketplace accounts so you can focus on your products.</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="ts-role">Small</div>
+          <div class="ts-size">13px</div>
+          <div class="ts-weight">Onest 400</div>
+          <div style="font-family:'Onest',sans-serif;font-size:13px;color:var(--stone);">20 product listings optimized per month</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="ts-role">Label</div>
+          <div class="ts-size">10–11px</div>
+          <div class="ts-weight">Onest 700</div>
+          <div style="font-family:'Onest',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--stone);">Most Popular Plan</div>
+        </div>
+        <div class="type-scale-row">
+          <div class="ts-role">Quote</div>
+          <div class="ts-size">20–24px</div>
+          <div class="ts-weight">Instrument Serif</div>
+          <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;color:var(--smoke);">"Sales 3x in 30 days!"</div>
+        </div>
+      </div>
+
+      <!-- Google Fonts import code -->
+      <div style="background:var(--ink);border-radius:10px;padding:20px 24px;margin-top:20px;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px;">Google Fonts Import Code</div>
+        <code style="font-family:'Onest',monospace;font-size:12.5px;color:rgba(255,255,255,0.7);line-height:1.9;display:block;">
+          &lt;link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;family=Onest:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"&gt;
+        </code>
+        <button class="download-btn" style="margin-top:12px;" onclick="copyFontCode()">Copy import code</button>
+      </div>
+    </section>
+
+    <div class="kit-divider"></div>
+
+    <!-- ══════════════════
+         04 BRAND VOICE
+    ══════════════════ -->
+    <section class="kit-section" id="voice">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <div>
+          <div class="section-title">Brand Voice & Copy</div>
+          <div class="section-desc">How Ecom Shakti speaks — bold, desi, direct</div>
+        </div>
+      </div>
+
+      <div class="voice-grid">
+        <div class="voice-tile">
+          <span class="voice-icon">💪</span>
+          <div class="voice-trait">Bold</div>
+          <div class="voice-desc">Confident and direct. We know what we do and say it plainly. No hedging.</div>
+        </div>
+        <div class="voice-tile">
+          <span class="voice-icon">🇮🇳</span>
+          <div class="voice-trait">Desi</div>
+          <div class="voice-desc">Hindi-English mix. "Apni sales 2X karein" — we speak like our clients.</div>
+        </div>
+        <div class="voice-tile">
+          <span class="voice-icon">⚡</span>
+          <div class="voice-trait">Fast</div>
+          <div class="voice-desc">Quick replies, quick fixes. No corporate delay or jargon.</div>
+        </div>
+        <div class="voice-tile">
+          <span class="voice-icon">📊</span>
+          <div class="voice-trait">Proof-led</div>
+          <div class="voice-desc">Numbers and results first. Before/after screenshots beat any claim.</div>
+        </div>
+      </div>
+
+      <div class="copy-examples">
+        <div class="copy-card">
+          <div class="copy-card-header good">Write like this ✓</div>
+          <div class="copy-card-body">"Listing reject ho gayi? Hum 24 ghante mein fix karte hain."</div>
+        </div>
+        <div class="copy-card">
+          <div class="copy-card-header bad">Not like this ✗</div>
+          <div class="copy-card-body">"Our comprehensive platform optimization solutions leverage synergistic methodologies to enhance your marketplace visibility."</div>
+        </div>
+        <div class="copy-card">
+          <div class="copy-card-header good">Write like this ✓</div>
+          <div class="copy-card-body">"1000+ sellers supported. Account suspended kiya? WhatsApp karo — free audit milega."</div>
+        </div>
+        <div class="copy-card">
+          <div class="copy-card-header bad">Not like this ✗</div>
+          <div class="copy-card-body">"We are pleased to offer our e-commerce account management services to help facilitate your online retail journey."</div>
+        </div>
+        <div class="copy-card">
+          <div class="copy-card-header good">CTA examples ✓</div>
+          <div class="copy-card-body">
+            "WhatsApp Karo Abhi →"<br>
+            "Free Audit Lo →"<br>
+            "Sales 2X Karein →"<br>
+            "Hum Fix Karenge →"
+          </div>
+        </div>
+        <div class="copy-card">
+          <div class="copy-card-header bad">CTAs to avoid ✗</div>
+          <div class="copy-card-body">
+            "Submit your inquiry"<br>
+            "Learn more about our services"<br>
+            "Contact us today"<br>
+            "Request a consultation"
+          </div>
+        </div>
+      </div>
+
+      <!-- Taglines -->
+      <div style="margin-top:20px;background:var(--warm);border:1px solid var(--border);border-radius:12px;padding:24px;">
+        <div class="tint-label">Approved taglines</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);">
+            <span style="font-size:13px;font-weight:700;color:var(--fire);min-width:80px;text-transform:uppercase;letter-spacing:1px;">Primary</span>
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:var(--ink);">Powering India's Marketplace Sellers</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);">
+            <span style="font-size:13px;font-weight:700;color:var(--stone);min-width:80px;text-transform:uppercase;letter-spacing:1px;">Hindi</span>
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:var(--ink);">Apni Sales 2X Karein</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);">
+            <span style="font-size:13px;font-weight:700;color:var(--stone);min-width:80px;text-transform:uppercase;letter-spacing:1px;">Short</span>
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:var(--ink);">Hum Hai Na.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:10px 0;">
+            <span style="font-size:13px;font-weight:700;color:var(--stone);min-width:80px;text-transform:uppercase;letter-spacing:1px;">Problem</span>
+            <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:var(--ink);">Your Sales Are Dying. We Fix That.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="kit-divider"></div>
+
+    <!-- ══════════════════
+         05 UI COMPONENTS
+    ══════════════════ -->
+    <section class="kit-section" id="components">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <div>
+          <div class="section-title">UI Components</div>
+          <div class="section-desc">Buttons, badges, and pricing cards — ready to use</div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="component-section">
+        <div class="component-label">Buttons</div>
+        <div class="btn-row">
+          <button class="es-btn es-btn-primary">Free Audit Lo →</button>
+          <button class="es-btn es-btn-secondary">View Plans</button>
+          <button class="es-btn es-btn-dark">WhatsApp Karo</button>
+          <button class="es-btn es-btn-ghost">Learn More</button>
+        </div>
+        <div class="btn-row">
+          <button class="es-btn es-btn-primary es-btn-sm">Small →</button>
+          <button class="es-btn es-btn-primary">Regular →</button>
+          <button class="es-btn es-btn-primary es-btn-lg">Large →</button>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="component-section">
+        <div class="component-label">Badges & Tags</div>
+        <div class="badge-row">
+          <span class="es-badge es-badge-fire">Most Popular</span>
+          <span class="es-badge es-badge-gold">⭐ 5+ Years Experience</span>
+          <span class="es-badge es-badge-green">✓ Account Fixed</span>
+          <span class="es-badge es-badge-ink">FREE Audit</span>
+          <span class="es-badge es-badge-stone">1000+ Sellers</span>
+        </div>
+      </div>
+
+      <!-- Pricing cards -->
+      <div class="component-section">
+        <div class="component-label">Pricing Cards</div>
+        <div class="card-showcase">
+          <div class="pricing-card">
+            <div class="pc-header dark-h">
+              <div class="pc-name">Shakti Starter</div>
+              <div class="pc-tag">Entry</div>
+            </div>
+            <div class="pc-body">
+              <div class="pc-price">₹1,999</div>
+              <div class="pc-per">per month</div>
+              <div class="pc-divider"></div>
+              <div class="pc-item"><span class="pc-check">✓</span>20 listings optimized</div>
+              <div class="pc-item"><span class="pc-check">✓</span>Title & image fix</div>
+              <div class="pc-item"><span class="pc-check">✓</span>Basic account health</div>
+              <div class="pc-item"><span class="pc-check">✓</span>WhatsApp support</div>
+              <button class="pc-cta ink-cta">Get Started</button>
+            </div>
+          </div>
+
+          <div class="pricing-card featured">
+            <div class="pc-header fire-h">
+              <div class="pc-name">Shakti Pro</div>
+              <div class="pc-tag">Popular ⭐</div>
+            </div>
+            <div class="pc-body">
+              <div class="pc-price">₹4,999</div>
+              <div class="pc-per">per month</div>
+              <div class="pc-divider"></div>
+              <div class="pc-item"><span class="pc-check">✓</span>50 listings / month</div>
+              <div class="pc-item"><span class="pc-check">✓</span>QC rejection fix</div>
+              <div class="pc-item"><span class="pc-check">✓</span>Policy violation help</div>
+              <div class="pc-item"><span class="pc-check">✓</span>Weekly report + SEO</div>
+              <button class="pc-cta fire-cta">Choose Pro →</button>
+            </div>
+          </div>
+
+          <div class="pricing-card">
+            <div class="pc-header dark-h">
+              <div class="pc-name">Shakti Max</div>
+              <div class="pc-tag">Premium</div>
+            </div>
+            <div class="pc-body">
+              <div class="pc-price">₹9,999</div>
+              <div class="pc-per">per month</div>
+              <div class="pc-divider"></div>
+              <div class="pc-item"><span class="pc-check">✓</span>Unlimited listings</div>
+              <div class="pc-item"><span class="pc-check">✓</span>Full account management</div>
+              <div class="pc-item"><span class="pc-check">✓</span>Ads management</div>
+              <div class="pc-item"><span class="pc-check">✓</span>Growth strategy calls</div>
+              <button class="pc-cta ink-cta">Get Started</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="kit-divider"></div>
+
+    <!-- ══════════════════
+         06 VISUAL PATTERNS
+    ══════════════════ -->
+    <section class="kit-section" id="patterns">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <div>
+          <div class="section-title">Visual Patterns</div>
+          <div class="section-desc">Recurring design elements for consistent brand expression</div>
+        </div>
+      </div>
+
+      <div class="pattern-grid">
+        <!-- Dark grid -->
+        <div class="pattern-tile">
+          <div class="pattern-preview pattern-grid-bg">
+            <div style="position:relative;z-index:1;font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:white;text-align:center;line-height:1.1;">Sales<br><span style="color:var(--fire);">2X.</span></div>
+          </div>
+          <div class="pattern-label">
+            <div class="pattern-title">Dark grid texture</div>
+            <div class="pattern-desc">For hero sections, posters, feature blocks</div>
+          </div>
+        </div>
+
+        <!-- Ghost type -->
+        <div class="pattern-tile">
+          <div class="pattern-preview" style="background:var(--fire);overflow:hidden;">
+            <div style="position:absolute;font-family:'Syne',sans-serif;font-size:100px;font-weight:800;color:rgba(255,255,255,0.08);right:-10px;top:50%;transform:translateY(-50%);">2X</div>
+            <div style="position:relative;z-index:1;font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:white;text-align:center;">Apni Sales<br>2X Karein!</div>
+          </div>
+          <div class="pattern-label">
+            <div class="pattern-title">Ghost typography</div>
+            <div class="pattern-desc">Large faint text as background element</div>
+          </div>
+        </div>
+
+        <!-- Accent border -->
+        <div class="pattern-tile">
+          <div class="pattern-preview" style="background:var(--warm);">
+            <div class="accent-border-demo">
+              <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--fire);text-transform:uppercase;letter-spacing:1px;">Pro Plan</div>
+              <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:white;line-height:1;">₹4,999<span style="font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);">/mo</span></div>
+            </div>
+          </div>
+          <div class="pattern-label">
+            <div class="pattern-title">Fire accent border</div>
+            <div class="pattern-desc">Left border highlight on dark cards</div>
+          </div>
+        </div>
+
+        <!-- Orange block -->
+        <div class="pattern-tile">
+          <div class="pattern-preview" style="background:var(--warm);">
+            <div style="background:var(--fire);padding:16px 20px;border-radius:8px;text-align:center;">
+              <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:4px;">Special Offer</div>
+              <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:white;line-height:1.1;">FREE Audit<br>+ 5 Listings</div>
+            </div>
+          </div>
+          <div class="pattern-label">
+            <div class="pattern-title">Fire CTA block</div>
+            <div class="pattern-desc">For offers, special deals, urgent CTAs</div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="pattern-tile">
+          <div class="pattern-preview" style="background:var(--cream);flex-direction:column;gap:6px;padding:16px;">
+            <div style="display:flex;align-items:center;gap:8px;width:100%;max-width:200px;">
+              <div style="flex:1;height:1px;background:var(--border);"></div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--stone);">or</div>
+              <div style="flex:1;height:1px;background:var(--border);"></div>
+            </div>
+            <div style="height:2px;width:40px;background:var(--fire);border-radius:2px;"></div>
+            <div style="height:1px;width:100%;max-width:200px;background:var(--border);"></div>
+          </div>
+          <div class="pattern-label">
+            <div class="pattern-title">Dividers</div>
+            <div class="pattern-desc">Fire underline, stone hairline, or-separator</div>
+          </div>
+        </div>
+
+        <!-- Social proof -->
+        <div class="pattern-tile">
+          <div class="pattern-preview" style="background:var(--ink);padding:16px;">
+            <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:12px 14px;width:100%;max-width:220px;">
+              <div style="font-size:14px;letter-spacing:2px;margin-bottom:6px;">⭐⭐⭐⭐⭐</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.5;"><span style="color:white;font-weight:600;">1000+ sellers</span> supported on Meesho, Flipkart & Amazon.</div>
+            </div>
+          </div>
+          <div class="pattern-label">
+            <div class="pattern-title">Social proof block</div>
+            <div class="pattern-desc">Stars + proof statement on dark bg</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="kit-divider"></div>
+
+    <!-- ══════════════════
+         07 SOCIAL MEDIA
+    ══════════════════ -->
+    <section class="kit-section" id="social">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <div>
+          <div class="section-title">Social Media Specs</div>
+          <div class="section-desc">Correct dimensions and usage for each platform</div>
+        </div>
+      </div>
+
+      <div class="social-grid">
+        <div class="social-spec-card">
+          <div class="social-spec-preview">
+            <div style="width:64px;height:64px;background:var(--fire);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+              <svg width="36" height="36" viewBox="0 0 32 32" fill="none"><path d="M7 25L16 5L25 25" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.5 18L21.5 18" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="25" cy="10" r="3.5" fill="#F0A500"/></svg>
+            </div>
+          </div>
+          <div class="social-spec-body">
+            <div class="social-platform">Profile Picture</div>
+            <div class="social-dim">
+              Size: 400×400 px<br>
+              Use: Icon on Fire bg<br>
+              Format: PNG (circular crop)<br>
+              All platforms
+            </div>
+          </div>
+        </div>
+
+        <div class="social-spec-card">
+          <div class="social-spec-preview" style="position:relative;overflow:hidden;">
+            <div style="position:absolute;inset:0;background:var(--ink);background-image:linear-gradient(rgba(232,69,10,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(232,69,10,0.08) 1px,transparent 1px);background-size:16px 16px;"></div>
+            <div style="position:relative;z-index:1;font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:white;text-align:center;line-height:1.1;">Ecom<br><span style="color:var(--fire);">Shakti.</span></div>
+          </div>
+          <div class="social-spec-body">
+            <div class="social-platform">Instagram Post (Square)</div>
+            <div class="social-dim">
+              Size: 1080×1080 px<br>
+              Use: Dark bg + grid texture<br>
+              Format: JPG/PNG<br>
+              Facebook, Instagram
+            </div>
+          </div>
+        </div>
+
+        <div class="social-spec-card">
+          <div class="social-spec-preview" style="position:relative;overflow:hidden;">
+            <div style="position:absolute;inset:0;background:var(--fire);"></div>
+            <div style="position:absolute;font-family:'Syne',sans-serif;font-size:60px;font-weight:800;color:rgba(255,255,255,0.07);right:-5px;top:50%;transform:translateY(-50%);">2X</div>
+            <div style="position:relative;z-index:1;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:white;text-align:center;">Apni Sales<br>2X Karein!</div>
+          </div>
+          <div class="social-spec-body">
+            <div class="social-platform">Instagram Story / WA Status</div>
+            <div class="social-dim">
+              Size: 1080×1920 px<br>
+              Use: Fire bg + ghost type<br>
+              Format: JPG/PNG/MP4<br>
+              WhatsApp, Instagram
+            </div>
+          </div>
+        </div>
+
+        <div class="social-spec-card">
+          <div class="social-spec-preview" style="background:var(--ink);">
+            <div style="background:var(--warm);border-radius:6px;padding:10px 14px;max-width:180px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <div style="width:20px;height:20px;background:var(--fire);border-radius:4px;display:flex;align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 32 32" fill="none"><path d="M7 25L16 5L25 25" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.5 18L21.5 18" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+                <span style="font-family:'Syne',sans-serif;font-size:11px;font-weight:800;color:var(--ink);">Ecom Shakti<span style="color:var(--fire);">.</span></span>
+              </div>
+              <div style="font-size:10px;color:var(--stone);line-height:1.5;">Marketplace account management for Indian sellers</div>
+            </div>
+          </div>
+          <div class="social-spec-body">
+            <div class="social-platform">LinkedIn Post</div>
+            <div class="social-dim">
+              Size: 1200×627 px<br>
+              Use: Light bg, formal tone<br>
+              Format: JPG/PNG<br>
+              LinkedIn
+            </div>
+          </div>
+        </div>
+
+        <div class="social-spec-card">
+          <div class="social-spec-preview" style="position:relative;overflow:hidden;background:var(--ink);">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,69,10,0.3) 0%,transparent 50%)"></div>
+            <div style="position:relative;z-index:1;text-align:center;">
+              <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:800;color:white;letter-spacing:2px;">ECOM SHAKTI</div>
+              <div style="font-size:20px;margin-top:4px;">⭐⭐⭐⭐⭐</div>
+            </div>
+          </div>
+          <div class="social-spec-body">
+            <div class="social-platform">YouTube Thumbnail</div>
+            <div class="social-dim">
+              Size: 1280×720 px<br>
+              Use: Dark + fire accent<br>
+              Format: JPG<br>
+              YouTube Shorts
+            </div>
+          </div>
+        </div>
+
+        <div class="social-spec-card">
+          <div class="social-spec-preview" style="background:var(--warm);">
+            <div style="display:flex;flex-direction:column;gap:4px;align-items:center;">
+              <div style="width:48px;height:48px;background:var(--fire);border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><path d="M7 25L16 5L25 25" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.5 18L21.5 18" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="25" cy="10" r="3.5" fill="#F0A500"/></svg></div>
+              <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:800;color:var(--ink);">Ecom Shakti<span style="color:var(--fire);">.</span></div>
+            </div>
+          </div>
+          <div class="social-spec-body">
+            <div class="social-platform">WhatsApp Business</div>
+            <div class="social-dim">
+              Profile pic: 500×500 px<br>
+              Use: Icon + wordmark<br>
+              Format: JPG (circular crop)<br>
+              WhatsApp Business
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color combos for social -->
+      <div style="margin-top:20px;background:var(--warm);border:1px solid var(--border);border-radius:12px;padding:24px;">
+        <div class="tint-label">Approved color combinations for posts</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:4px;">
+          <div style="border-radius:8px;overflow:hidden;">
+            <div style="background:var(--ink);height:48px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:white;">Ecom <span style="color:var(--fire);">Shakti.</span></div>
+            <div style="padding:8px 12px;background:white;font-size:11px;color:var(--stone);">Ink bg + White text + Fire accent</div>
+          </div>
+          <div style="border-radius:8px;overflow:hidden;">
+            <div style="background:var(--fire);height:48px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:white;">Ecom Shakti.</div>
+            <div style="padding:8px 12px;background:white;font-size:11px;color:var(--stone);">Fire bg + White text only</div>
+          </div>
+          <div style="border-radius:8px;overflow:hidden;">
+            <div style="background:var(--warm);border:1px solid var(--border);height:48px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--ink);">Ecom <span style="color:var(--fire);">Shakti.</span></div>
+            <div style="padding:8px 12px;background:white;font-size:11px;color:var(--stone);">Warm bg + Ink text + Fire accent</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /content -->
+
+  <!-- FOOTER -->
+  <div class="kit-footer">
+    <div>
+      <div class="footer-brand">Ecom Shakti<span class="dot">.</span></div>
+      <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:15px;color:rgba(255,255,255,0.3);margin-top:4px;">Powering India's Marketplace Sellers</div>
+    </div>
+    <div class="footer-meta">
+      Brand Kit v1.0 · April 2026<br>
+      Internal use only — do not distribute<br>
+      ecomshakti.com
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+/* Active nav on scroll */
+const sections = document.querySelectorAll('.kit-section');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector('.nav-link[href="#' + e.target.id + '"]');
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => observer.observe(s));
+
+/* Copy color to clipboard */
+function copyColor(hex) {
+  navigator.clipboard.writeText(hex).then(() => showToast('Copied ' + hex));
+}
+
+function copyFontCode() {
+  const code = '<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">';
+  navigator.clipboard.writeText(code).then(() => showToast('Font import code copied!'));
+}
+
+function showToast(msg) {
+  const t = document.getElementById('copyToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+/* Download logo SVGs */
+function downloadLogoSVG(theme) {
+  const isDark = theme === 'dark';
+  const bg = isDark ? '#0F0D0B' : '#F7F3EE';
+  const ecomColor = isDark ? 'rgba(255,255,255,0.4)' : '#8C8479';
+  const shaktiColor = isDark ? '#FFFFFF' : '#0F0D0B';
+
+  const svg = `<svg width="320" height="90" viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="90" fill="${bg}" rx="12"/>
+  <rect x="20" y="19" width="52" height="52" rx="11" fill="#E8450A"/>
+  <path d="M34 61 L46 31 L58 61" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M37.5 50 L54.5 50" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="58" cy="36" r="3.5" fill="#F0A500"/>
+  <text x="84" y="42" font-family="Syne, sans-serif" font-size="11" font-weight="600" letter-spacing="3" fill="${ecomColor}" text-anchor="start">ECOM</text>
+  <text x="82" y="68" font-family="Syne, sans-serif" font-size="34" font-weight="800" fill="${shaktiColor}" text-anchor="start">Shakti<tspan fill="#E8450A">.</tspan></text>
+</svg>`;
+
+  const blob = new Blob([svg], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'ecom-shakti-logo-' + theme + '.svg';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Logo SVG downloaded!');
+}
+
+function downloadIconSVG() {
+  const svg = `<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="120" rx="24" fill="#E8450A"/>
+  <path d="M30 90 L60 22 L90 90" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M40 65 L80 65" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="90" cy="36" r="11" fill="#F0A500"/>
+</svg>`;
+
+  const blob = new Blob([svg], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'ecom-shakti-icon.svg';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Icon SVG downloaded!');
+}
+</script>
+</body>
+</html>
