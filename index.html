@@ -434,6 +434,68 @@ body::before {
   line-height: 1.75;
 }
 
+/* ── INDUSTRIES SECTION ── */
+.industries {
+  background: var(--cream);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 56px;
+}
+.industry-card {
+  background: var(--cream);
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  position: relative;
+  transition: background 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+.industry-card:hover {
+  background: white;
+  box-shadow: inset 0 0 0 1.5px var(--fire), 0 4px 24px rgba(232,69,10,0.05);
+}
+.industry-num {
+  position: absolute;
+  top: 18px; right: 20px;
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--fire);
+  opacity: 0.5;
+}
+.industry-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: var(--fire-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.industry-card:hover .industry-icon {
+  background: rgba(232,69,10,0.12);
+}
+.industry-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.2px;
+  line-height: 1.25;
+}
+
 /* ── PROBLEMS SECTION ── */
 .problems {
   background: var(--warm);
@@ -1164,6 +1226,7 @@ html { overflow-x: hidden; }
   .hero-inner { grid-template-columns: 1fr; gap: 40px; }
   .section { padding: 72px 24px; }
   .problems-grid { grid-template-columns: 1fr 1fr; }
+  .industries-grid { grid-template-columns: repeat(3, 1fr); }
   .steps-row::before { display: none; }
   .steps-row { gap: 32px; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
@@ -1184,6 +1247,7 @@ html { overflow-x: hidden; }
 }
 @media (max-width: 600px) {
   .problems-grid { grid-template-columns: 1fr; }
+  .industries-grid { grid-template-columns: repeat(2, 1fr); }
   .steps-row { grid-template-columns: 1fr; }
   .outcomes-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
@@ -1211,7 +1275,7 @@ html { overflow-x: hidden; }
   </a>
   <ul class="nav-links">
     <li><a href="#problems">Problems We Fix</a></li>
-    <li><a href="#services">Services</a></li>
+    <li><a href="#industries">Industries</a></li>
     <li><a href="#how-it-works">How It Works</a></li>
     <li><a href="#pricing">Pricing</a></li>
   </ul>
@@ -1413,7 +1477,7 @@ html { overflow-x: hidden; }
         <div class="step-circle" style="background: rgba(232,69,10,0.1); border: 2px solid rgba(232,69,10,0.3);">
           <span class="step-num" style="color: var(--fire); font-size: 22px;">2</span>
         </div>
-        <h3 class="step-title">We audit your account free</h3>
+        <h3 class="step-title">We audit your account for free</h3>
         <p class="step-desc">Our team does a full account health check — listings, QC status, ads performance, policy flags — at zero cost.</p>
       </div>
       <div class="step">
@@ -1518,6 +1582,116 @@ html { overflow-x: hidden; }
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="section industries" id="industries">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Who we work with</div>
+      <h2 class="section-title">Every category.<br>Every marketplace.</h2>
+      <p class="section-desc">Deep expertise across India's fastest-growing product categories — we know what works on Meesho, Amazon, and Flipkart for your specific niche.</p>
+    </div>
+    <div class="industries-grid reveal">
+
+      <div class="industry-card">
+        <span class="industry-num">01</span>
+        <div class="industry-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
+        </div>
+        <div class="industry-name">Fashion &amp; Apparel</div>
+      </div>
+
+      <div class="industry-card">
+        <span class="industry-num">02</span>
+        <div class="industry-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 015 5c0 3.5-5 11-5 11S7 10.5 7 7a5 5 0 015-5z"/><circle cx="12" cy="7" r="2"/></svg>
+        </div>
+        <div class="industry-name">Beauty &amp; Personal Care</div>
+      </div>
+
+      <div class="industry-card">
+        <span class="industry-num">03</span>
+        <div class="industry-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        </div>
+        <div class="industry-name">Home Decor &amp; Furniture</div>
+      </div>
+
+      <div class="industry-card">
+        <span class="industry-num">04</span>
+        <div class="industry-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg>
+        </div>
+        <div class="industry-name">Electronics &amp; Gadgets</div>
+      </div>
+
+      <div class="industry-card">
+        <span class="industry-num">05</span>
+        <div class="industry-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <div class="industry-name">Health &amp; Wellness</div>
+      </div>
+
+      <div class="industry-card">
+        <span class="industry-num">06</span>
+        <div class="industry-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <div class="industry-name">Food &amp; Beverage</div>
+      </div>
+
+      <div class="industry-card">
+        <span class="industry-num">07</span>
+        <div class="industry-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <div class="industry-name">Jewelry &amp; Luxury</div>
+      </div>
+
+      <div class="industry-card">
+        <span class="industry-num">08</span>
+        <div class="industry-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M12 14c-5.5 0-8 2.5-8 4v1h16v-1c0-1.5-2.5-4-8-4z"/></svg>
+        </div>
+        <div class="industry-name">Baby &amp; Kids Products</div>
+      </div>
+
+      <div class="industry-card">
+        <span class="industry-num">09</span>
+        <div class="industry-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        </div>
+        <div class="industry-name">Books &amp; Digital Learning</div>
+      </div>
+
+      <div class="industry-card">
+        <span class="industry-num">10</span>
+        <div class="industry-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        </div>
+        <div class="industry-name">Grocery / FMCG</div>
+      </div>
+
+      <div class="industry-card">
+        <span class="industry-num">11</span>
+        <div class="industry-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v4H3z"/><path d="M3 7v13a1 1 0 001 1h16a1 1 0 001-1V7"/><path d="M9 21V11h6v10"/></svg>
+        </div>
+        <div class="industry-name">Marketplace Setup</div>
+      </div>
+
+      <div class="industry-card">
+        <span class="industry-num">12</span>
+        <div class="industry-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8450A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="17"/><line x1="9.5" y1="14.5" x2="14.5" y2="14.5"/></svg>
+        </div>
+        <div class="industry-name">B2B Ecommerce</div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1700,7 +1874,7 @@ html { overflow-x: hidden; }
       <div class="outcome-card">
         <div class="outcome-icon">⚡</div>
         <div class="outcome-title">24-hour Response</div>
-        <div class="outcome-desc">Every urgent request — suspension, QC block — handled within 24 hours of receiving.</div>
+        <div class="outcome-desc">Every urgent request — suspension, QC block — handled within 24 hours of receiving it.</div>
       </div>
       <div class="outcome-card">
         <div class="outcome-icon">🇮🇳</div>
@@ -1748,7 +1922,7 @@ html { overflow-x: hidden; }
         <div class="testi-stars">
           <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
         </div>
-        <p class="testi-quote">"I was wasting ₹8,000 a month on Amazon ads with no return. After Shakti Pro, my ROAS went up in the first month itself. Should have done this earlier."</p>
+        <p class="testi-quote">"I was wasting ₹8,000 a month on Amazon ads with no returns. After Shakti Pro, my ROAS went up in the first month itself. Should have done this earlier."</p>
         <div class="testi-divider"></div>
         <div class="testi-author">
           <div class="testi-avatar">SP</div>
